@@ -25,10 +25,16 @@ class SnippetList(generics.ListCreateAPIView):
     serializer_class = SnippetSerializer
     permission_classes = (SnippetListPermission,)
 
+    def pre_save(self, obj):
+        obj.owner = self.request.user
+
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+
+    def pre_save(self, obj):
+        obj.owner = self.request.user
 
 
 class SnippetHighlight(generics.GenericAPIView):
