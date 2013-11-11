@@ -5,3 +5,6 @@ local_settings.py
 
 # Path to database folder
 db/
+
+# vim swap files
+*.swp
