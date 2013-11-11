@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import permissions
 
-from drf_acl.models import SnippetUserPermission
+from drf_acl.models import SnippetGroupPermission, SnippetUserPermission
 
 
 class SnippetListPermission(permissions.BasePermission):
@@ -42,3 +42,29 @@ class SnippetDetailsUserPermission(permissions.BasePermission):
                 return False
         except ObjectDoesNotExist:
             return False
+
+
+class SnippetDetailsGroupPermission(permissions.BasePermission):
+    """
+    Check if any of the user's groups have permission to view snippet
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if type(request.user) == AnonymousUser:
+            return False
+
+        groups = request.user.groups.get_query_set()
+
+        try:
+            for group in groups:
+                snip_perm = SnippetGroupPermission.objects.get(group=group, snippet=obj)
+                if request.method == "GET":
+                    return snip_perm.get_perm
+                elif request.method == "POST":
+                    return snip_perm.get_perm
+                elif request.method == "DELETE":
+                    return snip_perm.delete_perm
+        except ObjectDoesNotExist:
+            return False
+
+        return False
