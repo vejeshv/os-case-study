@@ -63,6 +63,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'south',
+    'drf_acl',
     'snippets',
 )
 
