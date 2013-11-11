@@ -66,3 +66,5 @@ INSTALLED_APPS = (
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
+from local_settings import *
