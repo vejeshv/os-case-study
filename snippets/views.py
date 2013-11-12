@@ -31,6 +31,11 @@ class GroupList(generics.ListCreateAPIView):
     any_permission_classes = [GroupListPermission]
 
 
+class GroupDetail(generics.RetrieveAPIView):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
