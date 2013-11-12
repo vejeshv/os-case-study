@@ -12,7 +12,7 @@ from drf_acl.permissions import SnippetListPermission, SnippetDetailsUserPermiss
 from drf_acl.permissions import GroupListPermission, SnippetDetailsDefaultPermission, UserListPermission
 
 from snippets.models import Snippet
-from snippets.serializers import GroupSerializer, SnippetSerializer, UserSerializer
+from snippets.serializers import GroupSerializer, SnippetSerializer, SnippetListSerializer, UserSerializer
 
 
 @api_view(('GET',))
@@ -38,7 +38,7 @@ class GroupDetail(generics.RetrieveAPIView):
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    serializer_class = SnippetListSerializer
     permission_classes = (SnippetListPermission,)
 
     def pre_save(self, obj):
