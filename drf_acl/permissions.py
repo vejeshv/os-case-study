@@ -6,6 +6,18 @@ from rest_framework import permissions
 from drf_acl.models import SnippetDefaultPermission, SnippetGroupPermission, SnippetUserPermission
 
 
+class GroupListPermission(permissions.BasePermission):
+    """
+    Check if user has permission to list all groups
+    """
+
+    def has_permission(self, request, view):
+        if type(request.user) == AnonymousUser:
+            return False
+        else:
+            return True
+
+
 class SnippetListPermission(permissions.BasePermission):
     """
     Check if user has permission to list all snippets

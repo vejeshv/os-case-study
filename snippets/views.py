@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 
 from rest_any_permissions.permissions import AnyPermissions
 from rest_framework import generics
@@ -9,18 +9,26 @@ from rest_framework.reverse import reverse
 
 from drf_acl.models import SnippetDefaultPermission
 from drf_acl.permissions import SnippetListPermission, SnippetDetailsUserPermission, SnippetDetailsGroupPermission
-from drf_acl.permissions import SnippetDetailsDefaultPermission, UserListPermission
+from drf_acl.permissions import GroupListPermission, SnippetDetailsDefaultPermission, UserListPermission
 
 from snippets.models import Snippet
-from snippets.serializers import SnippetSerializer, UserSerializer
+from snippets.serializers import GroupSerializer, SnippetSerializer, UserSerializer
 
 
 @api_view(('GET',))
 def api_root(request, format=None):
     return Response({
+        'groups': reverse('group-list', request=request, format=format),
         'users': reverse('user-list', request=request, format=format),
         'snippets': reverse('snippet-list', request=request, format=format)
     })
+
+
+class GroupList(generics.ListCreateAPIView):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [GroupListPermission]
 
 
 class SnippetList(generics.ListCreateAPIView):
