@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import permissions
 
-from drf_acl.models import SnippetGroupPermission, SnippetUserPermission
+from drf_acl.models import SnippetDefaultPermission, SnippetGroupPermission, SnippetUserPermission
 
 
 class SnippetListPermission(permissions.BasePermission):
@@ -68,3 +68,23 @@ class SnippetDetailsGroupPermission(permissions.BasePermission):
             return False
 
         return False
+
+
+class SnippetDetailsDefaultPermission(permissions.BasePermission):
+    """
+    Check if default permission to view snippet satisfies request
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if type(request.user) == AnonymousUser:
+            return False
+
+        snip_perm = SnippetDefaultPermission.objects.get(snippet=obj)
+        if request.method == "GET":
+            return snip_perm.get_perm
+        elif request.method == "POST":
+            return snip_perm.post_perm
+        elif request.method == "DELETE":
+            return snip_perm.delete_perm
+        else:
+            return False
