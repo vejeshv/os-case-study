@@ -58,11 +58,11 @@ class SnippetDetailsGroupPermission(permissions.BasePermission):
         try:
             for group in groups:
                 snip_perm = SnippetGroupPermission.objects.get(group=group, snippet=obj)
-                if request.method == "GET":
+                if request.method == "GET" and snip_perm.get_perm:
                     return snip_perm.get_perm
-                elif request.method == "POST":
-                    return snip_perm.get_perm
-                elif request.method == "DELETE":
+                elif request.method == "POST" and snip_perm.post_perm:
+                    return snip_perm.post_perm
+                elif request.method == "DELETE" and snip_perm.delete_perm:
                     return snip_perm.delete_perm
         except ObjectDoesNotExist:
             return False
