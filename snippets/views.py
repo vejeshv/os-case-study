@@ -13,7 +13,8 @@ from drf_acl.permissions import SnippetListPermission, SnippetDetailsUserPermiss
 from drf_acl.permissions import GroupListPermission, SnippetDetailsDefaultPermission, UserListPermission
 
 from snippets.models import Snippet
-from snippets.serializers import GroupSerializer, SnippetSerializer, SnippetListSerializer, UserSerializer
+from snippets.serializers import GroupSerializer, SnippetDetailsSerializer, SnippetListSerializer, UserListSerializer
+from snippets.serializers import UserDetailSerializer
 
 
 @api_view(('GET',))
@@ -45,7 +46,7 @@ class SnippetList(generics.ListCreateAPIView):
         if self.request.method in permissions.SAFE_METHODS:
             return SnippetListSerializer
         else:
-            return SnippetSerializer
+            return SnippetDetailsSerializer
 
     def pre_save(self, obj):
         obj.owner = self.request.user
@@ -59,7 +60,7 @@ class SnippetList(generics.ListCreateAPIView):
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    serializer_class = SnippetDetailsSerializer
     permission_classes = [AnyPermissions]
     any_permission_classes = [SnippetDetailsUserPermission, SnippetDetailsGroupPermission, SnippetDetailsDefaultPermission]
 
@@ -80,11 +81,21 @@ class SnippetHighlight(generics.GenericAPIView):
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
     permission_classes = [AnyPermissions]
     any_permission_classes = [UserListPermission]
 
+    def get_serializer_class(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            return UserListSerializer
+        else:
+            return UserDetailSerializer
 
-class UserDetail(generics.RetrieveAPIView):
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+
+    def get_serializer_class(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            return UserListSerializer
+        else:
+            return UserDetailSerializer
