@@ -2,6 +2,7 @@ from django.contrib.auth.models import Group, User
 
 from rest_any_permissions.permissions import AnyPermissions
 from rest_framework import generics
+from rest_framework import permissions
 from rest_framework import renderers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -38,8 +39,13 @@ class GroupDetail(generics.RetrieveAPIView):
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetListSerializer
     permission_classes = (SnippetListPermission,)
+
+    def get_serializer_class(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            return SnippetListSerializer
+        else:
+            return SnippetSerializer
 
     def pre_save(self, obj):
         obj.owner = self.request.user
