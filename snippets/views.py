@@ -78,7 +78,7 @@ class SnippetHighlight(generics.GenericAPIView):
         return Response(snippet.highlighted)
 
 
-class UserList(generics.ListAPIView):
+class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AnyPermissions]
