@@ -8,7 +8,7 @@ from snippets.models import Snippet
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
-        fields = ('name', )
+        fields = ('url', )
 
 
 class SnippetSerializer(serializers.HyperlinkedModelSerializer):
