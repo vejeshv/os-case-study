@@ -9,7 +9,7 @@ from rest_framework.reverse import reverse
 
 from drf_acl.models import SnippetDefaultPermission
 from drf_acl.permissions import SnippetListPermission, SnippetDetailsUserPermission, SnippetDetailsGroupPermission
-from drf_acl.permissions import SnippetDetailsDefaultPermission
+from drf_acl.permissions import SnippetDetailsDefaultPermission, UserListPermission
 
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer, UserSerializer
@@ -60,6 +60,8 @@ class SnippetHighlight(generics.GenericAPIView):
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [UserListPermission]
 
 
 class UserDetail(generics.RetrieveAPIView):

@@ -88,3 +88,15 @@ class SnippetDetailsDefaultPermission(permissions.BasePermission):
             return snip_perm.delete_perm
         else:
             return False
+
+
+class UserListPermission(permissions.BasePermission):
+    """
+    Check if user has permission to list all users
+    """
+
+    def has_permission(self, request, view):
+        if type(request.user) == AnonymousUser:
+            return False
+        else:
+            return True
