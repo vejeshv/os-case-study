@@ -11,6 +11,7 @@ from rest_framework.reverse import reverse
 from drf_acl.models import SnippetDefaultPermission
 from drf_acl.permissions import SnippetListPermission, SnippetDetailsUserPermission, SnippetDetailsGroupPermission
 from drf_acl.permissions import GroupListPermission, SnippetDetailsDefaultPermission, UserListPermission
+from drf_acl.permissions import UserDetailPermission
 
 from snippets.models import Snippet
 from snippets.serializers import GroupSerializer, SnippetDetailsSerializer, SnippetListSerializer, UserListSerializer
@@ -93,6 +94,8 @@ class UserList(generics.ListCreateAPIView):
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [UserDetailPermission]
 
     def get_serializer_class(self):
         if self.request.method in permissions.SAFE_METHODS:

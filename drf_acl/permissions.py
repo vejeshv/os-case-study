@@ -112,3 +112,20 @@ class UserListPermission(permissions.BasePermission):
             return False
         else:
             return True
+
+
+class UserDetailPermission(permissions.BasePermission):
+    """
+    Check if user has permission to view/modify/delete user
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if type(request.user) == AnonymousUser:
+            return False
+
+        if request.user.is_staff or request.user.is_superuser:
+            return True
+        elif request.method in permissions.SAFE_METHODS:
+            return True
+        else:
+            return False
