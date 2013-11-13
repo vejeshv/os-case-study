@@ -110,8 +110,12 @@ class UserListPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if type(request.user) == AnonymousUser:
             return False
-        else:
+        elif request.user.is_staff or request.user.is_superuser:
             return True
+        elif request.method in permissions.SAFE_METHODS:
+            return True
+        else:
+            return False
 
 
 class UserDetailPermission(permissions.BasePermission):
