@@ -6,9 +6,11 @@ from snippets.models import Snippet
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
+    user_set = serializers.HyperlinkedRelatedField(view_name='user-detail', many=True)
+
     class Meta:
         model = Group
-        fields = ('url', )
+        fields = ('url', 'user_set')
 
 
 class SnippetDetailsSerializer(serializers.HyperlinkedModelSerializer):
