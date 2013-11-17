@@ -122,6 +122,22 @@ class SnippetDetailsDefaultPermission(permissions.BasePermission):
             return False
 
 
+class SnippetPermissionPermission(permissions.BasePermission):
+    """
+    Check if user has permission to modify permissions
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if type(request.user) == AnonymousUser:
+            return False
+        elif request.method in permissions.SAFE_METHODS:
+            return True
+        elif request.user == obj.snippet.owner:
+            return True
+        else:
+            return False
+
+
 class UserListPermission(permissions.BasePermission):
     """
     Check if user has permission to list all users

@@ -11,7 +11,7 @@ from rest_framework.reverse import reverse
 from drf_acl.models import SnippetDefaultPermission, SnippetGroupPermission, SnippetUserPermission
 from drf_acl.permissions import SnippetListPermission, SnippetDetailsUserPermission, SnippetDetailsGroupPermission
 from drf_acl.permissions import GroupListPermission, SnippetDetailsDefaultPermission, UserListPermission
-from drf_acl.permissions import UserDetailPermission, GroupDetailPermission
+from drf_acl.permissions import UserDetailPermission, GroupDetailPermission, SnippetPermissionPermission
 
 from snippets.models import Snippet
 from snippets.serializers import GroupSerializer, SnippetDetailsSerializer, SnippetListSerializer, UserListSerializer
@@ -101,6 +101,8 @@ class SnippetUserPermissionList(generics.ListCreateAPIView):
 class SnippetUserPermissionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SnippetUserPermission.objects.all()
     serializer_class = SnippetUserPermissionDetailSerializer
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [SnippetPermissionPermission]
 
 
 class SnippetGroupPermissionList(generics.ListCreateAPIView):
@@ -111,6 +113,8 @@ class SnippetGroupPermissionList(generics.ListCreateAPIView):
 class SnippetGroupPermissionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SnippetGroupPermission.objects.all()
     serializer_class = SnippetGroupPermissionDetailSerializer
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [SnippetPermissionPermission]
 
 
 class SnippetDefaultPermissionList(generics.ListAPIView):
@@ -121,6 +125,8 @@ class SnippetDefaultPermissionList(generics.ListAPIView):
 class SnippetDefaultPermissionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SnippetDefaultPermission.objects.all()
     serializer_class = SnippetDefaultPermissionDetailSerializer
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [SnippetPermissionPermission]
 
 
 class UserList(generics.ListCreateAPIView):
