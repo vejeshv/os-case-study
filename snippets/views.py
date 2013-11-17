@@ -8,14 +8,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
-from drf_acl.models import SnippetDefaultPermission
+from drf_acl.models import SnippetDefaultPermission, SnippetUserPermission
 from drf_acl.permissions import SnippetListPermission, SnippetDetailsUserPermission, SnippetDetailsGroupPermission
 from drf_acl.permissions import GroupListPermission, SnippetDetailsDefaultPermission, UserListPermission
 from drf_acl.permissions import UserDetailPermission, GroupDetailPermission
 
 from snippets.models import Snippet
 from snippets.serializers import GroupSerializer, SnippetDetailsSerializer, SnippetListSerializer, UserListSerializer
-from snippets.serializers import UserDetailSerializer
+from snippets.serializers import UserDetailSerializer, SnippetUserPermissionListSerializer, SnippetUserPermissionDetailSerializer
 
 
 @api_view(('GET',))
@@ -80,6 +80,16 @@ class SnippetHighlight(generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
         snippet = self.get_object()
         return Response(snippet.highlighted)
+
+
+class SnippetUserPermissionList(generics.ListCreateAPIView):
+    queryset = SnippetUserPermission.objects.all()
+    serializer_class = SnippetUserPermissionListSerializer
+
+
+class SnippetUserPermissionDetail(generics.RetrieveAPIView):
+    queryset = SnippetUserPermission.objects.all()
+    serializer_class = SnippetUserPermissionDetailSerializer
 
 
 class UserList(generics.ListCreateAPIView):
