@@ -29,6 +29,15 @@ def api_root(request, format=None):
     })
 
 
+@api_view(('GET',))
+def permissions_root(request, format=None):
+    return Response({
+        'users': reverse('snippetuserpermission', request=request, format=format),
+        'groups': reverse('snippetgrouppermission', request=request, format=format),
+        'defaults': reverse('snippetdefaultpermission', request=request, format=format)
+    })
+
+
 class GroupList(generics.ListCreateAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
