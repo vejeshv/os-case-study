@@ -22,6 +22,22 @@ class GroupListPermission(permissions.BasePermission):
             return False
 
 
+class GroupDetailPermission(permissions.BasePermission):
+    """
+    Check if user can permission for method on group instance
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if type(request.user) == AnonymousUser:
+            return False
+        elif request.method in permissions.SAFE_METHODS:
+            return True
+        elif request.user.is_staff or request.user.is_superuser:
+            return True
+        else:
+            return False
+
+
 class SnippetListPermission(permissions.BasePermission):
     """
     Check if user has permission to list all snippets

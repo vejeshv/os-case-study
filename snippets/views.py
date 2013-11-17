@@ -11,7 +11,7 @@ from rest_framework.reverse import reverse
 from drf_acl.models import SnippetDefaultPermission
 from drf_acl.permissions import SnippetListPermission, SnippetDetailsUserPermission, SnippetDetailsGroupPermission
 from drf_acl.permissions import GroupListPermission, SnippetDetailsDefaultPermission, UserListPermission
-from drf_acl.permissions import UserDetailPermission
+from drf_acl.permissions import UserDetailPermission, GroupDetailPermission
 
 from snippets.models import Snippet
 from snippets.serializers import GroupSerializer, SnippetDetailsSerializer, SnippetListSerializer, UserListSerializer
@@ -34,9 +34,11 @@ class GroupList(generics.ListCreateAPIView):
     any_permission_classes = [GroupListPermission]
 
 
-class GroupDetail(generics.RetrieveAPIView):
+class GroupDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [GroupDetailPermission]
 
 
 class SnippetList(generics.ListCreateAPIView):
