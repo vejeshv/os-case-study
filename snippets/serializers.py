@@ -33,8 +33,8 @@ class SnippetListSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SnippetUserPermissionListSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.Field(source='user.username')
-    snippet = serializers.Field(source='snippet.title')
+    user = serializers.HyperlinkedRelatedField(view_name='user-detail')
+    snippet = serializers.HyperlinkedRelatedField(view_name='snippet-detail')
 
     class Meta:
         model = SnippetUserPermission
@@ -42,8 +42,8 @@ class SnippetUserPermissionListSerializer(serializers.HyperlinkedModelSerializer
 
 
 class SnippetUserPermissionDetailSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.Field(source='user.username')
-    snippet = serializers.Field(source='snippet.title')
+    user = serializers.HyperlinkedRelatedField(view_name='user-detail')
+    snippet = serializers.HyperlinkedRelatedField(view_name='snippet-detail')
 
     class Meta:
         model = SnippetUserPermission
@@ -51,8 +51,8 @@ class SnippetUserPermissionDetailSerializer(serializers.HyperlinkedModelSerializ
 
 
 class SnippetGroupPermissionListSerializer(serializers.HyperlinkedModelSerializer):
-    group = serializers.Field(source='group.name')
-    snippet = serializers.Field(source='snippet.title')
+    group = serializers.HyperlinkedRelatedField(view_name='group-detail')
+    snippet = serializers.HyperlinkedRelatedField(view_name='snippet-detail')
 
     class Meta:
         model = SnippetGroupPermission
@@ -60,8 +60,8 @@ class SnippetGroupPermissionListSerializer(serializers.HyperlinkedModelSerialize
 
 
 class SnippetGroupPermissionDetailSerializer(serializers.HyperlinkedModelSerializer):
-    group = serializers.Field(source='group.name')
-    snippet = serializers.Field(source='snippet.title')
+    group = serializers.HyperlinkedRelatedField(view_name='group-detail')
+    snippet = serializers.HyperlinkedRelatedField(view_name='snippet-detail')
 
     class Meta:
         model = SnippetGroupPermission
@@ -69,7 +69,7 @@ class SnippetGroupPermissionDetailSerializer(serializers.HyperlinkedModelSeriali
 
 
 class SnippetDefaultPermissionListSerializer(serializers.HyperlinkedModelSerializer):
-    snippet = serializers.Field(source='snippet.title')
+    snippet = serializers.HyperlinkedRelatedField(view_name='snippet-detail')
 
     class Meta:
         model = SnippetDefaultPermission
@@ -77,7 +77,7 @@ class SnippetDefaultPermissionListSerializer(serializers.HyperlinkedModelSeriali
 
 
 class SnippetDefaultPermissionDetailSerializer(serializers.HyperlinkedModelSerializer):
-    snippet = serializers.Field(source='snippet.title')
+    snippet = serializers.HyperlinkedRelatedField(view_name='snippet-detail')
 
     class Meta:
         model = SnippetDefaultPermission
