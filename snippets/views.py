@@ -17,6 +17,7 @@ from snippets.models import Snippet
 from snippets.serializers import GroupSerializer, SnippetDetailsSerializer, SnippetListSerializer, UserListSerializer
 from snippets.serializers import UserDetailSerializer, SnippetUserPermissionListSerializer, SnippetUserPermissionDetailSerializer
 from snippets.serializers import SnippetGroupPermissionListSerializer, SnippetGroupPermissionDetailSerializer
+from snippets.serializers import SnippetDefaultPermissionListSerializer, SnippetDefaultPermissionDetailSerializer
 
 
 @api_view(('GET',))
@@ -101,6 +102,16 @@ class SnippetGroupPermissionList(generics.ListCreateAPIView):
 class SnippetGroupPermissionDetail(generics.RetrieveAPIView):
     queryset = SnippetGroupPermission.objects.all()
     serializer_class = SnippetGroupPermissionDetailSerializer
+
+
+class SnippetDefaultPermissionList(generics.ListCreateAPIView):
+    queryset = SnippetDefaultPermission.objects.all()
+    serializer_class = SnippetDefaultPermissionListSerializer
+
+
+class SnippetDefaultPermissionDetail(generics.RetrieveAPIView):
+    queryset = SnippetDefaultPermission.objects.all()
+    serializer_class = SnippetDefaultPermissionDetailSerializer
 
 
 class UserList(generics.ListCreateAPIView):
