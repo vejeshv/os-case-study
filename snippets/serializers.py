@@ -15,7 +15,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SnippetDetailsSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.Field(source='owner.username')
+    owner = serializers.HyperlinkedRelatedField(view_name='user-detail')
     highlight = serializers.HyperlinkedIdentityField(view_name='snippet-highlight', format='html')
 
     class Meta:
@@ -24,7 +24,7 @@ class SnippetDetailsSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SnippetListSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.Field(source='owner.username')
+    owner = serializers.HyperlinkedRelatedField(view_name='user-detail')
     highlight = serializers.HyperlinkedIdentityField(view_name='snippet-highlight', format='html')
 
     class Meta:
