@@ -2,7 +2,7 @@ from django.contrib.auth.models import Group, User
 
 from rest_framework import serializers
 
-from drf_acl.models import SnippetUserPermission
+from drf_acl.models import SnippetUserPermission, SnippetGroupPermission
 from snippets.models import Snippet
 
 
@@ -48,6 +48,24 @@ class SnippetUserPermissionDetailSerializer(serializers.HyperlinkedModelSerializ
     class Meta:
         model = SnippetUserPermission
         fields = ('url', 'user', 'snippet', 'get_perm', 'post_perm', 'delete_perm')
+
+
+class SnippetGroupPermissionListSerializer(serializers.HyperlinkedModelSerializer):
+    group = serializers.Field(source='group.name')
+    snippet = serializers.Field(source='snippet.title')
+
+    class Meta:
+        model = SnippetGroupPermission
+        fields = ('url', 'group', 'snippet', 'get_perm', 'post_perm', 'delete_perm')
+
+
+class SnippetGroupPermissionDetailSerializer(serializers.HyperlinkedModelSerializer):
+    group = serializers.Field(source='group.name')
+    snippet = serializers.Field(source='snippet.title')
+
+    class Meta:
+        model = SnippetGroupPermission
+        fields = ('url', 'group', 'snippet', 'get_perm', 'post_perm', 'delete_perm')
 
 
 class UserDetailSerializer(serializers.HyperlinkedModelSerializer):
