@@ -10,7 +10,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Group
-        fields = ('url', 'user_set')
+        fields = ('url', 'name', 'user_set')
 
 
 class SnippetDetailsSerializer(serializers.HyperlinkedModelSerializer):
