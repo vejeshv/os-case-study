@@ -18,6 +18,7 @@ from snippets.serializers import GroupSerializer, SnippetDetailsSerializer, Snip
 from snippets.serializers import UserDetailSerializer, SnippetUserPermissionListSerializer, SnippetUserPermissionDetailSerializer
 from snippets.serializers import SnippetGroupPermissionListSerializer, SnippetGroupPermissionDetailSerializer
 from snippets.serializers import SnippetDefaultPermissionListSerializer, SnippetDefaultPermissionDetailSerializer
+from snippets.serializers import SnippetChangeSerializer
 
 
 @api_view(('GET',))
@@ -60,7 +61,7 @@ class SnippetList(generics.ListCreateAPIView):
         if self.request.method in permissions.SAFE_METHODS:
             return SnippetListSerializer
         else:
-            return SnippetDetailsSerializer
+            return SnippetChangeSerializer
 
     def pre_save(self, obj):
         obj.owner = self.request.user
@@ -74,9 +75,14 @@ class SnippetList(generics.ListCreateAPIView):
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetDetailsSerializer
     permission_classes = [AnyPermissions]
     any_permission_classes = [SnippetDetailsUserPermission, SnippetDetailsGroupPermission, SnippetDetailsDefaultPermission]
+
+    def get_serializer_class(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            return SnippetDetailsSerializer
+        else:
+            return SnippetChangeSerializer
 
     def pre_save(self, obj):
         obj.owner = self.request.user

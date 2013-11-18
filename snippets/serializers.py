@@ -32,6 +32,12 @@ class SnippetListSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('title', 'owner', 'url', 'highlight', 'language')
 
 
+class SnippetChangeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Snippet
+        fields = ('title', 'code', 'linenos', 'language', 'style')
+
+
 class SnippetUserPermissionListSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.HyperlinkedRelatedField(view_name='user-detail')
     snippet = serializers.HyperlinkedRelatedField(view_name='snippet-detail')
