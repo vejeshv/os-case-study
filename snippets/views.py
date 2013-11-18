@@ -96,6 +96,8 @@ class SnippetHighlight(generics.GenericAPIView):
 class SnippetUserPermissionList(generics.ListCreateAPIView):
     queryset = SnippetUserPermission.objects.all()
     serializer_class = SnippetUserPermissionListSerializer
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [SnippetPermissionPermission]
 
 
 class SnippetUserPermissionDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -108,6 +110,8 @@ class SnippetUserPermissionDetail(generics.RetrieveUpdateDestroyAPIView):
 class SnippetGroupPermissionList(generics.ListCreateAPIView):
     queryset = SnippetGroupPermission.objects.all()
     serializer_class = SnippetGroupPermissionListSerializer
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [SnippetPermissionPermission]
 
 
 class SnippetGroupPermissionDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -120,6 +124,8 @@ class SnippetGroupPermissionDetail(generics.RetrieveUpdateDestroyAPIView):
 class SnippetDefaultPermissionList(generics.ListAPIView):
     queryset = SnippetDefaultPermission.objects.all()
     serializer_class = SnippetDefaultPermissionListSerializer
+    permission_classes = [AnyPermissions]
+    any_permission_classes = [SnippetPermissionPermission]
 
 
 class SnippetDefaultPermissionDetail(generics.RetrieveUpdateDestroyAPIView):

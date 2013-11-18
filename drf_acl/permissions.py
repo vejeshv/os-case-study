@@ -5,6 +5,8 @@ from rest_framework import permissions
 
 from drf_acl.models import SnippetDefaultPermission, SnippetGroupPermission, SnippetUserPermission
 
+from snippets.models import Snippet
+
 
 class GroupListPermission(permissions.BasePermission):
     """
@@ -126,6 +128,26 @@ class SnippetPermissionPermission(permissions.BasePermission):
     """
     Check if user has permission to modify permissions
     """
+
+    def has_permission(self, request, view):
+        if type(request.user) == AnonymousUser:
+            return False
+        elif request.method in permissions.SAFE_METHODS:
+            return True
+
+        try:
+            if request.POST != {}:
+                snippet_id = int(request.POST['snippet'].split('/')[-2])
+            else:
+                return True
+        except ValueError:
+            return False
+
+        snippet = Snippet.objects.get(id=snippet_id)
+        if snippet.owner == request.user:
+            return True
+        else:
+            return False
 
     def has_object_permission(self, request, view, obj):
         if type(request.user) == AnonymousUser:
