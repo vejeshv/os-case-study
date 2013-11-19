@@ -50,6 +50,7 @@ Setting up the database
 After specifying the settings, run the following commands to create the database.
 
 $ python manage.py syncdb --all
+
 $ python manage.py migrate --fake
 
 Create a superuser when prompted to do so. This user will be used to login to admin interface of the site.
