@@ -23,6 +23,8 @@ export PROJECT_HOME=$HOME/directory-you-do-development-in
 source /usr/local/bin/virtualenvwrapper.sh
 ```
 
+and restart the terminal(or run the source command with the startup file of your shell as the argument).
+
 Create a new virtual environment with any name.
 
 ``` bash
