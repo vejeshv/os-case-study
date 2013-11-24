@@ -11,7 +11,9 @@ The recommended way to develop Python projects is to use virtual environments fo
 
 Install virtualenvwrapper which will install virtualenv as well.
 
+``` bash
 $ pip install virtualenvwrapper
+```
 
 Add following to the shell's startup file(.zshrc, .bashrc, .profile, etc)
 
