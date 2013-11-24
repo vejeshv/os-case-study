@@ -30,7 +30,7 @@ $ mkvirtualenv website
 ```
 
 This command will create and switch to the virtual environment(the name of the environment will be prepended to the shell).
-If not, run the following command to switch.
+If not, run the following command to activate the virtual environment.
 
 ``` bash
 $ workon website
