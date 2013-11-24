@@ -53,7 +53,8 @@ Specifying website settings
 ---------------------------
 
 - Copy template local-settings.py to same directory where settings.py resides and rename it to local_settings.py.
-- Set values for DATABASES and ADMINS. I recommend sqlite3 for testing but not production: easy to setup(just give path to database file).
+- Set values for DATABASES and ADMINS. sqlite3 is a good choice during testing since it's easy to setup(just give path to database
+  file) but not in production.
 - Generate the SECRET_KEY as per instructions in the local_settings.py file.
 - You might want to set DEBUG = True for testing else set a value for ALLOWED_HOSTS if deploying in production.
 
