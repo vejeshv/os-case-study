@@ -15,22 +15,30 @@ $ pip install virtualenvwrapper
 
 Add following to the shell's startup file(.zshrc, .bashrc, .profile, etc)
 
+``` bash
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/directory-you-do-development-in
 source /usr/local/bin/virtualenvwrapper.sh
+```
 
 Create a new virtual environment with any name.
 
+``` bash
 $ mkvirtualenv website
+```
 
 This command will create and switch to the virtual environment(the name of the environment will be prepended to the shell).
 If not, run the following command to switch.
 
+``` bash
 $ workon website
+```
 
 Now let's install the required packages within this virtualenv.
 
+``` bash
 $ pip install -r requirements.txt
+```
 
 Note: drf-any-permissions will be installed from [txel's github](https://github.com/txels/drf-any-permissions) since current version
 (0.0.1 as of writing) at PyPI doesn't provide what it advertises. It is good to check if an update has been made available that
@@ -51,9 +59,10 @@ Setting up the database
 
 After specifying the settings, run the following commands to create the database.
 
+``` bash
 $ python manage.py syncdb --all
-
 $ python manage.py migrate --fake
+```
 
 Create a superuser when prompted to do so. This user will be used to login to admin interface of the site.
 
@@ -61,4 +70,8 @@ Create a superuser when prompted to do so. This user will be used to login to ad
 Running the development server
 ---------------------------
 
-If no errors are reported, the development server is ready. Run python manage.py runserver to start it.
+If no errors are reported, the development server is ready. Run the server by issuing the command
+
+``` bash
+$ python manage.py runserver
+```
