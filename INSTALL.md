@@ -40,8 +40,9 @@ fixes the issues before using the github repository. Ensure that git is installe
 Specifying website settings
 ---------------------------
 
-Modify the template locate-settings.py file and copy it to the location specified inside the file. In particular, set the
-values for SECRET_KEY, DATABASES and ADMINS.
+- Copy template local-settings.py to same directory where settings.py resides and rename it to local_settings.py.
+- Set values for DATABASES and ADMINS. I recommend sqlite3 for testing but not production: easy to setup(just give path to database file).
+- Generate the SECRET_KEY as per instructions in the local_settings.py file.
 
 
 Setting up the database

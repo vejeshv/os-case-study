@@ -17,9 +17,11 @@ MANAGERS = ADMINS
 ALLOWED_HOSTS = []
 
 # Generate a secret key, and don't share it with anybody.
-# from django.utils.crypto import get_random_string
-# chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
-# get_random_string(50, chars)
+# $ python manage.py shell
+# >>> from django.utils.crypto import get_random_string
+# >>> chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+# >>> get_random_string(50, chars)
+# Set output of get_random_string as value of SECRET_KEY
 SECRET_KEY = '00000000000000000000000000000000000000000000000000'
 
 DATABASES = {
