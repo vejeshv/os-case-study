@@ -66,7 +66,7 @@ class SnippetDetailsUserPermission(permissions.BasePermission):
             snip_perm = SnippetUserPermission.objects.get(user=request.user, snippet=obj)
             if request.method == "GET":
                 return snip_perm.get_perm
-            elif request.method == "POST":
+            elif request.method == "PUT":
                 return snip_perm.post_perm
             elif request.method == "DELETE":
                 return snip_perm.delete_perm
@@ -92,7 +92,7 @@ class SnippetDetailsGroupPermission(permissions.BasePermission):
                 snip_perm = SnippetGroupPermission.objects.get(group=group, snippet=obj)
                 if request.method == "GET" and snip_perm.get_perm:
                     return snip_perm.get_perm
-                elif request.method == "POST" and snip_perm.post_perm:
+                elif request.method == "PUT" and snip_perm.post_perm:
                     return snip_perm.post_perm
                 elif request.method == "DELETE" and snip_perm.delete_perm:
                     return snip_perm.delete_perm
@@ -114,7 +114,7 @@ class SnippetDetailsDefaultPermission(permissions.BasePermission):
         snip_perm = SnippetDefaultPermission.objects.get(snippet=obj)
         if request.method == "GET":
             return snip_perm.get_perm
-        elif request.method == "POST":
+        elif request.method == "PUT":
             return snip_perm.post_perm
         elif request.method == "DELETE":
             return snip_perm.delete_perm
