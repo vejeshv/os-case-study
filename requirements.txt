@@ -3,5 +3,5 @@ Pygments==1.6
 South==0.8.2
 argparse==1.2.1
 djangorestframework==2.3.8
--e git+https://github.com/txels/drf-any-permissions.git@2e36e18d024980bf4a6a3c49ae3a69a3a6491c58#egg=drf_any_permissions-master
+-e git+https://github.com/kevin-brown/drf-any-permissions@b6f8b8d1e118b8b4242a41ee196ee1212f81b388#egg=drf_any_permissions-master
 wsgiref==0.1.2

@@ -44,8 +44,8 @@ Now let's install the required packages within this virtualenv.
 $ pip install -r requirements.txt
 ```
 
-Note: drf-any-permissions will be installed from [txel's github](https://github.com/txels/drf-any-permissions) since current version
-(0.0.1 as of writing) at PyPI doesn't provide what it advertises. It is good to check if an update has been made available that
+Note: drf-any-permissions will be installed from [Kevin Brown's github](https://github.com/kevin-brown/drf-any-permissions) since current
+version (0.0.1 as of writing) at PyPI doesn't provide what it advertises. It is good to check if an update has been made available that
 fixes the issues before using the github repository. Ensure that git is installed before installing from github.
 
 
