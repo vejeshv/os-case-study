@@ -69,7 +69,7 @@ class SnippetDetailsUserPermission(permissions.BasePermission):
             if request.method == "GET":
                 return snip_perm.get_perm
             elif request.method == "POST":
-                return snip_perm.get_perm
+                return snip_perm.post_perm
             elif request.method == "DELETE":
                 return snip_perm.delete_perm
             else:
